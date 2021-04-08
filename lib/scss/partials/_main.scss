@@ -1,0 +1,252 @@
+@charset "utf-8";
+
+html, body, header, footer, hgroup, nav, article, section, figure,
+figcaption, h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  border: 0;
+}
+
+body {
+  text-align: center;
+}
+
+.start form {
+  display: inline-block;
+  width: 325px;
+  height: 350px;
+  position: center;
+  text-align: left;
+}
+
+.gameForm form {
+  display: block;
+  text-align: center;
+}
+
+input[type="submit"] {
+  width: 7em;
+}
+
+p.submit {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+p.checkColor {
+  padding-left: 0.4em;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2em;
+  background-color: dodgerblue;
+  padding-left: 0.25em;
+  margin-bottom: 0.5em;
+}
+
+nav p {
+  padding-top: 0.5em;
+  margin-top: 0;
+  font-size: 1.25em;
+}
+
+nav p.navigation {
+  text-align: right;
+  padding-right: 6.5em;
+  margin-bottom: 0;
+}
+
+p.startChoice {
+  text-align: center;
+}
+
+fieldset {
+  padding: 0;
+  margin-top: 0.5em;
+}
+
+
+div.game {
+  display: inline-block;
+  position: relative;
+  margin: 1em auto;
+  width: 96vw;
+  height: 96vw;
+  max-width: 1024px;
+  max-height: 1024px;
+  border: 0;
+  box-sizing: border-box;
+  padding: 0;
+
+  background-image: url('../images/sorryboard.png');
+
+  background-size: 100% 100%;
+}
+
+div.game > div.board {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin: 0 0 0 0;
+  width: 100%;
+  height: 100%;
+}
+
+div.game div.row {
+  display: flex;
+  flex: 1 1 auto;
+  padding: 0;
+  width: 100%;
+  height: 6.25%;
+  min-height: 6.25%;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+div.game div.cell {
+  flex: 1 0 6.25%;
+  vertical-align: top;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* border: 1px solid orange; */
+}
+
+div.cell button {
+  border: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+/* no blue outline when click a cell, even if it is not part not the game
+div.cell button:focus {
+    outline:0;
+}
+*/
+
+div.help {
+  padding-left: 1.75em;
+  padding-right: 1.75em;
+}
+
+div.help h1 {
+  font-size: 3em;
+  background-color: yellow;
+}
+
+div.help h2 {
+  text-align: left;
+}
+
+div.help p {
+  text-align: left;
+}
+
+div.game-links p {
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  font-size: 1.5em;
+}
+
+
+.credits{
+  padding-left: 1.75em;
+  padding-right: 1.75em;
+  text-align: left;
+}
+.credits p{
+  padding-bottom: 0;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.cards{
+  background-image: url('../images/card_back.png');
+  position: absolute;
+  top: 320px;
+  left: 320px;
+  width: 193px;
+  height: 257px;
+}
+
+#current_card{
+  position: absolute;
+  top: 320px;
+  left: 513px;
+  width: 193px;
+  height: 257px;
+}
+
+
+button[name="done"]{
+  position: absolute;
+  font-size: 1.2em;
+  background-color: white;
+  border: 1px solid black;
+  top: 640px;
+  left: 448px;
+  width: 129px;
+  height: 64px;
+}
+
+
+
+div.gameinfo{
+  font-size: 2em;
+}
+
+#greenTurn, #greenWin{
+  color: green;
+}
+
+#redTurn, #redWin{
+  color: red;
+}
+
+#blueTurn, #blueWin{
+  color: blue;
+}
+
+#yellowTurn, #yellowWin{
+  color: yellow;
+}
+
+#noWin{
+  color: slategrey;
+}
+#playerTurn p{
+  display: inline-block;
+  vertical-align: top;
+  padding: 0.25em;
+  margin: 0;
+}
+
+#winDisplay{
+  font-size: 2em;
+  margin: 1em;
+  background-color: lightgrey;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#WinnerDiv p{
+  display: inline-block;
+  vertical-align: top;
+  padding: .25em;
+  margin: 0;
+}
+
+.state5{
+  margin: 0.5em 0 0 0;
+}
+
+#instruction{
+  text-decoration: underline;
+}

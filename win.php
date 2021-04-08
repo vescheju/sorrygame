@@ -31,7 +31,7 @@ else{
 <head>
     <meta charset="utf-8">
     <title>Sorry!</title>
-    <link href="game.css" type="text/css" rel="stylesheet" />
+    <link href="lib/game.css" type="text/css" rel="stylesheet" />
 
 </head>
 <body>
