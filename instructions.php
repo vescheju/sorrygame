@@ -5,7 +5,7 @@
 <!-- instructions.php -->
 <html lang="en">
 <head>
-    <link href="lib/game.css" type="text/css" rel="stylesheet" />
+    <link href="game.css" type="text/css" rel="stylesheet" />
     <meta charset="UTF-8">
     <title>Sorry! Instructions</title>
 </head>

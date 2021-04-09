@@ -5,8 +5,7 @@ namespace Game;
 
 
 
-class GameView
-{
+class GameView extends View{
     public function __construct(Game $game) {
         $this->game = $game;
     }

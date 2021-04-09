@@ -4,8 +4,7 @@
 namespace Game;
 
 
-class StartView
-{
+class StartView extends View{
     /** Constructor
      * @param Game $currGame start menu object
      */
