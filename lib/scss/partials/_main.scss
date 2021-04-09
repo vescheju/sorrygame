@@ -81,7 +81,7 @@ div.game {
   box-sizing: border-box;
   padding: 0;
 
-  background-image: url('./images/sorryboard.png');
+  background-image: url('./../../../images/sorryboard.png');
 
   background-size: 100% 100%;
 }
@@ -167,7 +167,7 @@ div.game-links p {
 }
 
 .cards{
-  background-image: url('images/card_back.png');
+
   position: absolute;
   top: 320px;
   left: 320px;

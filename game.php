@@ -9,8 +9,11 @@ $view = new Game\GameView($game);
     <title>Sorry!</title>
     <link href="game.css" type="text/css" rel="stylesheet" />
 
+
 </head>
 <body>
+
+
 <?php
 echo $view->gameState();
 echo $view->grid();

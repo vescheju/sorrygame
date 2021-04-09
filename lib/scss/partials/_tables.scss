@@ -1,0 +1,50 @@
+$border-color: #C1DAD7;
+$grad-end: #73d189;
+
+table {
+  margin-left:auto;
+  margin-right:auto;
+  -moz-box-shadow: 6pt 6px 10pt $shadow;
+  -webkit-box-shadow: 6pt 6px 10pt $shadow;
+  box-shadow: 6pt 6px 10pt $shadow;
+  border-left: 1px solid #e0e0e0;
+  border-collapse: collapse;
+}
+
+table th {
+  color: white;
+  background-color: $msu;
+  background: -webkit-gradient(linear, left top, left bottom, from($msu), to($grad-end));
+  background: -webkit-linear-gradient(top, $msu, $grad-end);
+  background: -moz-linear-gradient(top, $msu, $grad-end);
+  background: -ms-linear-gradient(top, $msu, $grad-end);
+  background: -o-linear-gradient(top, $msu, $grad-end);
+  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  border-top: 1px solid $border-color;
+  text-align: left;
+  font-family: Helvetica, Arial, Sans-Serif;
+  text-decoration: none;
+  padding: 0.1em 0.5em;
+}
+
+table td {
+  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  background: white;
+  padding: 0.1em 0.5em;
+  color: #4f6b72;
+}
+
+th a:link {
+  color: #F5F3EB;
+}
+
+th a:visited {
+  color: #E3DCC5;
+}
+
+th a:hover {
+  color: #ffffff;
+}
