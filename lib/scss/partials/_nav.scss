@@ -1,0 +1,48 @@
+.nav {
+  position: relative;
+  background-color: $msu;
+  color: white;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  text-align: left;
+
+  ul {
+    font-size: 1.2em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+    }
+
+    li a {
+      display: block;
+      padding: 0.5em 0.5em;
+    }
+
+    a:hover {
+      background-color: green;
+    }
+
+    a:visited, a:link {
+      color: white;
+      text-decoration: none;
+    }
+
+    ul.left{
+      text-align: left;
+      position: relative;
+
+      left: 4em;
+      top: 0;
+    }
+
+  }
+
+  ul.right {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+

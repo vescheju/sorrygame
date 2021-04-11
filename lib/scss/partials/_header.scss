@@ -1,0 +1,26 @@
+
+header {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  background-color: white;
+  padding: 1em 0;
+
+  h1 {
+    font-size: 3em;
+    text-align: center;
+    background-color: white;
+
+    img {
+      width: 2.12em;
+      height: 2em;
+      vertical-align: middle;
+    }
+  }
+
+  p {
+    font-size: 1.2em;
+    margin: 1em 5em;
+    text-align: center;
+    position: relative;
+  }
+
+}

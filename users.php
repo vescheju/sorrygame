@@ -12,6 +12,7 @@
 
 <body>
 <div class="users">
+    <div class="nav">
     <nav>
         <ul class="left">
             <li><a href="./">Home</a></li>
@@ -21,9 +22,11 @@
             <li><a href="./">Log out</a></li>
         </ul>
     </nav>
+    </div>
 
     <header class="main">
-
+        <h1><img src="images/green.png" alt="Green game piece"> Sorry
+            <img src="images/green.png" alt="Green game piece"></h1>
     </header>
 
     <form class="table">
@@ -64,7 +67,7 @@
 
 
     <footer>
-        <p>Sorry</p>
+        <p>Sorry! Team 25</p>
     </footer>
 
 </div>
