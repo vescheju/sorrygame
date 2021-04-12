@@ -2,7 +2,26 @@
 require __DIR__ . "/../vendor/autoload.php";
 
 // Start the PHP session system
+
+$site = new Game\Site();
+$localize = require 'localize.inc.php';
+if(is_callable($localize)) {
+    $localize($site);
+}
+
 session_start();
+
+$user = null;
+if(isset($_SESSION[Game\User::SESSION_NAME])) {
+    $user = $_SESSION[Game\User::SESSION_NAME];
+}
+
+// redirect if user is not logged in
+if((!isset($open) || !$open) && $user === null) {
+    $root = $site->getRoot();
+    header("location: $root/");
+    exit;
+}
 
 define("GAME_SESSION", 'game');
 

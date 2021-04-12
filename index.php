@@ -1,6 +1,7 @@
 <?php
+$open = true;
 require __DIR__ . '/lib/game.inc.php';
-$view = new Game\StartView($game);
+$view = new Game\LoginView();
 ?>
 <!doctype html>
 <html>
@@ -11,6 +12,6 @@ $view = new Game\StartView($game);
 
 </head>
 <body>
-<?php echo $view->choose(); ?>
+<?php echo $view->present(); ?>
 </body>
 </html>

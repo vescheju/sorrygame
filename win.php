@@ -46,7 +46,8 @@ else{
 
 
 <div class="game-links">
-    <p class="game-link"><a href="index.php">Start Menu</a></p>
+    <p class="game-link"><a href="start.php">Start Menu</a></p>
+    <p class="game-link"><a href="logout-post.php">Log Out</a></p>
 </div>
 
 </body>
