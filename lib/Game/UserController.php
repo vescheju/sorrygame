@@ -5,14 +5,36 @@ namespace Game;
 
 
 class UserController{
-    public function __construct(Site $site, User $user, array $post)
+    public function __construct(Site $site, array $post)
     {
         $root = $site->getRoot();
-        $this->redirect = "$root/users.php";
+        $this->redirect = "$root";
 
         if (isset($post['cancel'])) {
             return;
         }
+
+        $email = strip_tags($post['email']);
+        $name = strip_tags($post['name']);
+        $id = 0;
+        $notes = '';
+        $role = User::CLIENT;
+
+        $row = ['id' => $id,
+            'email' => $email,
+            'name' => $name,
+            'notes' => $notes,
+            'password' => null,
+            'joined' => null,
+            'role' => $role
+        ];
+        $editUser = new User($row);
+
+        $users = new Users($site);
+        $mailer = new Email();
+        $users->add($editUser, $mailer);
+
+
     }
 
     /**

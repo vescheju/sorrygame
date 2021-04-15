@@ -12,7 +12,7 @@ class UserView extends View{
 
     public function present(){
         $html = <<<HTML
-<form action="post/user.php">
+<form method="post" action="post/user.php">
         <fieldset>
             <legend>User</legend>
             <p>Please enter in the following information:</p>

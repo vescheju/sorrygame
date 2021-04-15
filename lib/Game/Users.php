@@ -47,5 +47,91 @@ SQL;
 
 
     }
+    /**
+     * Determine if a user exists in the system.
+     * @param $email An email address.
+     * @return true if $email is an existing email address
+     */
+    public function exists($email) {
+
+        $sql =<<<SQL
+SELECT * from $this->tableName
+where email=?
+SQL;
+
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        $statement->execute([$email]);
+        if($statement->rowCount() === 0) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+
+
+
+
+    /**
+     * Create a new user.
+     * @param User $user The new user data
+     * @param Email $mailer An Email object to use
+     * @return null on success or error message if failure
+     */
+    public function add(User $user, Email $mailer) {
+        // Ensure we have no duplicate email address
+        if($this->exists($user->getEmail())) {
+            return "Email address already exists.";
+        }
+
+        // Add a record to the user table
+        $sql = <<<SQL
+INSERT INTO $this->tableName(email, name, notes, joined, role)
+values(?, ?, ?, ?, ?)
+SQL;
+
+        $statement = $this->pdo()->prepare($sql);
+        $statement->execute([
+            $user->getEmail(), $user->getName(),
+            $user->getNotes(), date("Y-m-d H:i:s"), $user->getRole()
+        ]);
+        $id = $this->pdo()->lastInsertId();
+
+        // Create a validator and add to the validator table
+        $validators = new Validators($this->site);
+        $validator = $validators->newValidator($id);
+
+        // Send email with the validator in it
+        $link = "http://webdev.cse.msu.edu"  . $this->site->getRoot() .
+            '/password-validate.php?v=' . $validator;
+
+        $from = $this->site->getEmail();
+        $name = $user->getName();
+
+        $subject = "Confirm your email";
+        $message = <<<MSG
+<html>
+<p>Greetings, $name,</p>
+
+<p>Welcome to Sorry! In order to complete your registration,
+please verify your email address by visiting the following link:</p>
+
+<p><a href="$link">$link</a></p>
+</html>
+MSG;
+        $headers = "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso=8859-1\r\nFrom: $from\r\n";
+        $mailer->mail($user->getEmail(), $subject, $message, $headers);
+    }
+
+
+
+
+
+
+
+
 
 }
