@@ -25,7 +25,7 @@ class UserView extends View{
                 <input type="text" id="name" name="name" placeholder="Name">
             </p>
             <p>
-                <input type="submit" value="OK"> <input type="submit" value="Cancel">
+                <input type="submit" name="ok" id="ok" value="OK"> <input type="submit" name="cancel" id="cancel" value="Cancel">
             </p>
 
         </fieldset>
