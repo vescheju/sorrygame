@@ -42,10 +42,73 @@ HTML;
 HTML;
     }
 
+    /**
+     * Create the HTML for the page header
+     * @return string HTML for the standard page header
+     */
+    public function header() {
+        $html = <<<HTML
+<div class="nav">
+<nav>
+    <ul class="left">
+        <li><a href="./">Home</a></li>
+    </ul>
+HTML;
+
+        if(count($this->links) > 0) {
+            $html .= '<ul class="right">';
+            foreach($this->links as $link) {
+                $html .= '<li><a href="' .
+                    $link['href'] . '">' .
+                    $link['text'] . '</a></li>';
+            }
+            $html .= '</ul>';
+        }
+        $additional = $this->headerAdditional();
+
+        $html .= <<<HTML
+</nav>
+</div>
+<header class="main">
+    <h1><img src="images/green.png" alt="Green game piece"> $this->title
+    <img src="images/green.png" alt="Green game piece"></h1>
+    $additional
+</header>
+HTML;
+        return $html;
+    }
+
+    /**
+     * Override in derived class to add content to the header.
+     * @return string Any additional comment to put in the header
+     */
+    protected function headerAdditional() {
+        return '';
+    }
+
+
+
+    /**
+     * Add a link that will appear on the nav bar
+     * @param $href What to link to
+     * @param $text
+     */
+    public function addLink($href, $text) {
+        $this->links[] = ["href" => $href, "text" => $text];
+    }
+
+    public function footer()
+    {
+        return <<<HTML
+<footer><p>Sorry! Team 25</p></footer>
+HTML;
+    }
+
+
 
 
     private $title = "";
-
+    private $links = [];	// Links to add to the nav bar
 
 
 }
