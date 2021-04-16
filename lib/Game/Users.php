@@ -128,6 +128,73 @@ MSG;
 
 
 
+    /**
+     * Get a user based on the id
+     * @param $id ID of the user
+     * @return User object if successful, null otherwise.
+     */
+    public function get($id) {
+        $sql =<<<SQL
+SELECT * from $this->tableName
+where id=?
+SQL;
+
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        $statement->execute(array($id));
+        if($statement->rowCount() === 0) {
+            return null;
+        }
+
+        return new User($statement->fetch(\PDO::FETCH_ASSOC));
+
+
+    }
+
+
+
+    /**
+     * Generate a random salt string of characters for password salting
+     * @param $len Length to generate, default is 16
+     * @return Salt string
+     */
+    public static function randomSalt($len = 16) {
+        $bytes = openssl_random_pseudo_bytes($len / 2);
+        return bin2hex($bytes);
+    }
+
+
+
+    /**
+     * Set the password for a user
+     * @param $userid The ID for the user
+     * @param $password New password to set
+     */
+    public function setPassword($userid, $password) {
+        $salt = self::randomSalt();
+        $hash = hash("sha256", $password . $salt);
+        $sql =<<<SQL
+UPDATE $this->tableName
+set password=?, salt=?
+where id=?
+SQL;
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        try {
+            $ret = $statement->execute(array($hash,$salt,$userid));
+        } catch(\PDOException $e) {
+            return;
+        }
+
+
+    }
+
+
+
+
+
 
 
 
