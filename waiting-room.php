@@ -1,6 +1,10 @@
 <?php
 require __DIR__ . '/lib/game.inc.php';
-$view = new Game\WaitingRoomView($game);
+$view = new Game\WaitingRoomView($game, $site);
+if(!$view->protect($site, $user)) {
+    header("location: " . $view->getProtectRedirect());
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,8 +13,11 @@ $view = new Game\WaitingRoomView($game);
 </head>
 
 <body>
+<div class="waiting-room">
     <?php echo $view->header(); ?>
-
+    <?php echo $view->present() ?>
     <?php echo $view->footer() ?>
+</div>
+
 </body>
 </html>

@@ -3,7 +3,6 @@
 
 namespace Game;
 
-
 class Users extends Table
 {
     public function __construct(Site $site) {
@@ -189,6 +188,33 @@ SQL;
         }
 
 
+    }
+
+    public function getListUsers()
+    {
+        $final = [];
+        try {
+            $sql = <<<SQL
+SELECT * FROM $this->tableName
+ORDER BY role DESC
+SQL;
+            $pdo = $this->pdo();
+            $statement = $pdo->prepare($sql);
+            $statement->execute();
+            if ($statement->rowCount() == 0) {
+                return [];
+            }
+        } catch (\PDOException $e) {
+            return [];
+        }
+
+        $all = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        foreach ($all as $row) {
+            $user = new User($row);
+            $final[] = $user;
+        }
+
+        return $final;
     }
 
 

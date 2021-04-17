@@ -23,6 +23,14 @@ class View{
         $this->protectRedirect = $site->getRoot() . "/";
         return false;
     }
+
+    /**
+     * Get any redirect page
+     */
+    public function getProtectRedirect() {
+        return $this->protectRedirect;
+    }
+
     /**
      * Set the page title
      * @param $title New page title
@@ -106,7 +114,7 @@ HTML;
 
 
 
-
+    private $protectRedirect = null;    /// Page protection redirect
     private $title = "";
     private $links = [];	// Links to add to the nav bar
 
