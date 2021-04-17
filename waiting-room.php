@@ -1,16 +1,16 @@
 <?php
 require __DIR__ . '/lib/game.inc.php';
-$view = new Game\StartView($game);
+$view = new Game\WaitingRoomView($game);
 ?>
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Waiting Room</title>
-    <link href="lib/game.css" type="text/css" rel="stylesheet" />
-
+    <?php echo $view->head(); ?>
 </head>
+
 <body>
-<?php echo $view->choose(); ?>
+    <?php echo $view->header(); ?>
+
+    <?php echo $view->footer() ?>
 </body>
 </html>
