@@ -75,4 +75,12 @@ SQL;
     {
         //TO DO
     }
+
+    public function createGame(){
+        //TO DO
+    }
+
+    public function deleteGame(){
+        //TO DO
+    }
 }
