@@ -26,7 +26,7 @@ class LoginView
             <input type="password" id="password" name="password" placeholder="Password">
         </p>
         <p>
-            <input type="submit" value="Log in">
+            <input type="submit" name="login" id="login" value="Log in"><input type="submit" name="signup" id="signup" value="Sign up">
         </p>
 
     </fieldset>

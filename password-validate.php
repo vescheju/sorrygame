@@ -1,8 +1,7 @@
 <?php
 $open = true;
 require 'lib/game.inc.php';
-$view = new Game\UserView($site);
-
+$view = new Game\PasswordValidateView($site, $_GET);
 ?>
 
 
@@ -19,10 +18,7 @@ $view = new Game\UserView($site);
     echo $view->present();
     ?>
 
-
-    <?php
-    echo $view->footer();
-    ?>
+    <?php echo $view->footer(); ?>
 
 </div>
 
