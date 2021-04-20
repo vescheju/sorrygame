@@ -20,7 +20,7 @@ class LoginController
                 // Login failed
                 $this->redirect = "$root/?e";
             } else {
-                $this->redirect = "$root/start.php";
+                $this->redirect = "$root/rooms.php";
             }
 
         }else if(isset($post['signup'])){

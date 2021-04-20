@@ -15,8 +15,6 @@ class RoomsView extends View
         $info = new GameInfoTable($this->site);
         $rooms = $info->getGamesByState(false);
         $users = new Users($this->site);
-
-
         $html = <<<HTML
 
 <h1>Welcome to Sorry!</h1>
@@ -35,7 +33,7 @@ for ($i=0; $i<count($rooms); $i++){
         <p class="1">$game_id</p>
         <p class="2">$owner</p>
         <p class="3">$players</p>
-        <p class="4"><input type="submit" id="join_btn" value="Join"></p>
+        <p class="4"><a href="post/rooms-post.php?game-id=$game_id">Join</a></p>
     </div>
 HTML;
 }
@@ -43,8 +41,8 @@ HTML;
         $html .= <<<HTML
     </fieldset>
     <p>
-        <input type="submit" name="create_room" id="create_room" value="Create a room"></a>
-        <input type="submit" name="random_room" id="random_room" value="Join a random room"></a>
+        <input type="submit" name="create_room" id="create_room" value="Create a room">TODO
+        <input type="submit" name="random_room" id="random_room" value="Join a random room">TODO
     </p>
 
 </form>

@@ -1,8 +1,12 @@
 <?php
 require __DIR__ . '/lib/game.inc.php';
 $open = true;
-$view = new Game\RoomView($site);
+$view = new Game\RoomView($site, $_GET);
+
 ?>
+
+
+
 <!doctype html>
 <html>
 <head>
