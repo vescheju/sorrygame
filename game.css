@@ -68,7 +68,6 @@ fieldset {
     margin-top: 0.5em;
 }
 
-
 div.game {
     display: inline-block;
     position: relative;
@@ -153,7 +152,6 @@ div.game-links p {
     font-size: 1.5em;
 }
 
-
 .credits{
     padding-left: 1.75em;
     padding-right: 1.75em;
@@ -194,8 +192,6 @@ button[name="done"]{
     width: 129px;
     height: 64px;
 }
-
-
 
 div.gameinfo{
     font-size: 2em;
@@ -250,3 +246,4 @@ div.gameinfo{
 #instruction{
     text-decoration: underline;
 }
+

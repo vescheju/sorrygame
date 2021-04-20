@@ -7,7 +7,6 @@ namespace Game;
 class GameTable
 {
 
-
     public function __construct($row){
         $this->id = $row['id'];
         $this->state = json_decode($row['state'],true);

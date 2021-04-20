@@ -4,3 +4,24 @@
 @import "scss/partials/nav";
 @import "scss/partials/header";
 @import "scss/partials/footer";
+
+.room_entry{
+  margin: 0.2em;
+  padding: 0.2em;
+  border: 0.2em solid #2b542c;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-gap: 10px;
+}
+
+@for $i from 1 through 4 {
+  .room_entry p:nth-child(#{$i}){
+    grid-row:1 / span 1
+
+  }
+
+}
+
+#create_room, #random_room {
+  width: auto;
+}
