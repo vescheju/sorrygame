@@ -40,7 +40,14 @@ else{
 
     <div id='WinnerDiv'>
         <p id = '<?php echo $id;?>'><?php echo $color;?></p>
-        <p>won the game!</p>
+        <p>won the game! Congratulations!!</p>
+    </div>
+</div>
+
+<div id = "loseDisplay">
+
+    <div id='LoserDiv'>
+        <p>Better Luck next time!</p>
     </div>
 </div>
 
