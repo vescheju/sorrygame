@@ -9,11 +9,9 @@ class GameTable
 
     public function __construct($row){
         $this->id = $row['id'];
-        $this->state = json_decode($row['state'],true);
-        $this->redId = $row['red_player_id'];
-        $this->blueId = $row['blue_player_id'];
-        $this->greenId = $row['green_player_id'];
-        $this->yellowId = $row['yellow_player_id'];
+        $this->players = json_decode($row['players'],true);
+        $this->started = $row['started'];
+        $this->ownerId = $row['owner_id'];
     }
 
     /**
@@ -27,31 +25,21 @@ class GameTable
     /**
      * @return mixed
      */
-    public function getState()
+    public function getStarted()
     {
-        return $this->state;
+        return $this->started;
     }
 
-    public function getPlayerId($color){
-        if($color == Game::YELLOW){
-            return $this->yellowId;
-        }
-        elseif($color == Game::BLUE){
-            return $this->blueId;
-        }
-        elseif($color == Game::RED){
-            return $this->redId;
-        }
-        elseif($color == Game::GREEN){
-            return $this->greenId;
-        }
+    public function getOwnerId(){
+        return $this->ownerId;
     }
+    public function getPlayerIds(){
+        return $this->players;
+    }
+
 
     private $id;
-    private $state;
-    private $redId;
-    private $blueId;
-    private $greenId;
-    private $yellowId;
-
+    private $players;
+    private $started;
+    private $ownerId;
 }
