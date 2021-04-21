@@ -19,7 +19,6 @@ class RoomsView extends View
         $users = new Users($this->site);
         $html = <<<HTML
 
-<h1>Welcome to Sorry!</h1>
 <a href="./rooms.php">Refresh list</a>
 <form method="post" action="">
     <fieldset>

@@ -9,6 +9,7 @@ $view = new Game\RoomsView($site);
     <?php echo $view->head(); ?>
 </head>
 <body>
+<?php echo $view->header(); ?>
 <?php echo $view->present(); ?>
 <?php echo $view->footer(); ?>
 </body>
