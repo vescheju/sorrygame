@@ -13,6 +13,8 @@ class RoomView extends View
     public function __construct(Site $site, $get){
         $this->site = $site;
         $this->game_id = $get["game-id"];
+        $this->setTitle("Sorry! Waiting Room");
+        $this->addLink("instructions.php", "Instructions");
     }
 
     public function present(){

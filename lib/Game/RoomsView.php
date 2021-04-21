@@ -9,6 +9,8 @@ class RoomsView extends View
     private $site;
     public function __construct(Site $site){
         $this->site = $site;
+        $this->setTitle("Sorry! Rooms");
+        $this->addLink("instructions.php", "Instructions");
     }
 
     public function present(){
@@ -17,7 +19,6 @@ class RoomsView extends View
         $users = new Users($this->site);
         $html = <<<HTML
 
-<h1>Welcome to Sorry!</h1>
 <a href="./rooms.php">Refresh list</a>
 <form method="post" action="">
     <fieldset>
