@@ -9,6 +9,8 @@ class RoomsView extends View
     private $site;
     public function __construct(Site $site){
         $this->site = $site;
+        $this->setTitle("Sorry! Rooms");
+        $this->addLink("instructions.php", "Instructions");
     }
 
     public function present(){
