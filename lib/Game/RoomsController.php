@@ -19,7 +19,7 @@ class RoomsController
         $info = new GameInfoTable($this->site);
 
 
-        if (isset($post["leave"])){
+        if (isset($post["leave"]) || isset($post["home"])){
             $info->LeaveRoomById($get["game-id"], $user);
             $this->redirect = "$root/rooms.php";
         } else if (isset($get["game-id"])){

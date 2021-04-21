@@ -59,7 +59,10 @@ HTML;
 <div class="nav">
 <nav>
     <ul class="left">
-        <li><a href="./">Home</a></li>
+        <li>
+            <a href="./">Home</a>
+            <input type="hidden" name="home" id="home" value="home"/>    
+        </li>
     </ul>
 HTML;
 
