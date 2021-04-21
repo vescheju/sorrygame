@@ -13,7 +13,13 @@ class RoomView extends View
     public function __construct(Site $site, $get){
         $this->site = $site;
         $this->game_id = $get["game-id"];
-        $this->setTitle("Sorry! Waiting Room");
+
+        $info = new GameInfoTable($this->site);
+        $room = $info->getGamesById($this->game_id);
+        $users = new Users($this->site);
+        // print_r($room);
+        $owner = $users->get($room->getOwnerId())->getName();
+        $this->setTitle("$owner's Waiting Room");
         $this->addLink("instructions.php", "Instructions");
     }
 
@@ -23,10 +29,8 @@ class RoomView extends View
         $room = $info->getGamesById($this->game_id);
         $users = new Users($this->site);
         // print_r($room);
-        $owner = $users->get($room->getOwnerId())->getName();
         $html = <<<HTML
             TODO: update this page when room info is changed. ex. someone joined/ someone got ready/ host started the game
-            <h1>$owner's Room</h1>
 <form method="post" action="post/rooms-post.php?game-id=$this->game_id">
             <input type="submit" name="leave" id="" value="Leave">
  <fieldset>
