@@ -28,6 +28,10 @@ SQL;
         return new GameTable($statement->fetch(\PDO::FETCH_ASSOC));
     }
 
+
+    //getState and setState need to be updated once we decide what state is
+
+    /*
     public function getState(GameTable $gameTable)
     {
         $sql = <<<SQL
@@ -70,17 +74,101 @@ SQL;
         }
         return true;
     }
+    */
 
-    public function addPlayer($playerId, $color)
+    public function addPlayer(GameTable $gameTable, GamePlayer $player)
     {
-        //TO DO
+       $players = $gameTable->getPlayerIds();
+       $count = count($players);
+       $key = "player" . $count;
+       $players[$key] = $player->getId();
+
+       $json = json_encode($players);
+
+        $sql = <<<SQL
+UPDATE $this->tableName
+SET players=?
+WHERE id=?
+SQL;
+
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        try {
+            $statement->execute(array($json, $gameTable->getId()));
+        }
+        catch(\PDOException $e) {
+            return false;
+        }
+        if($statement->rowCount() === 0) {
+            return false;
+        }
+        return true;
+
     }
 
-    public function createGame(){
-        //TO DO
+    public function getPlayer(GameTable $gameTable, $colorCode){
+        $playerTable = new PlayerTable($this->site);
+        $players = $gameTable->getPlayerIds();
+        foreach ($players as $playerId){
+            $player = $playerTable->getPlayerById($playerId);
+            if($player->getColor() == $colorCode){
+                return $player;
+            }
+        }
+        return null;
     }
 
-    public function deleteGame(){
-        //TO DO
+    public function createGame(User $user, GamePlayer $player){
+        $players = array("player1"=>$player->getId());
+        $jsonPlayers = json_encode($players);
+        $started = 0;
+        $ownerId = $user->getId();
+
+        $sql = <<<SQL
+INSERT INTO $this->tableName(started, owner_id, players)
+values(?, ?, ?,)
+SQL;
+
+        $statement = $this->pdo()->prepare($sql);
+        $statement->execute([
+            $started,
+            $ownerId,
+            $jsonPlayers
+        ]);
+        return $this->pdo()->lastInsertId();
+    }
+
+    public function setStarted(GameTable $gameTable, $started){
+        $sql = <<<SQL
+UPDATE $this->tableName
+SET started=?
+WHERE id=?
+SQL;
+
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        try {
+            $statement->execute(array($started, $gameTable->getId()));
+        }
+        catch(\PDOException $e) {
+            return false;
+        }
+        if($statement->rowCount() === 0) {
+            return false;
+        }
+        return true;
+    }
+
+
+    public function deleteGame(GameTable $gameTable){
+        $sql = <<<SQL
+DELETE FROM $this->tableName
+WHERE id=?
+SQL;
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+        $statement->execute(array($gameTable->getId()));
     }
 }
