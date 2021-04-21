@@ -14,7 +14,7 @@ class StartView extends View{
 
     public function multiPlayerChoose(){
         $html = '<a href = "rooms.php"><button>Join a Room</button></a>';
-        $html .= '<a href = "waiting-room.php"><button>Create a Room</button></a>';
+        $html .= '<a href = "room.php"><button>Create a Room</button></a>';
         $html .= '<nav><p><a href="instructions.php">Instructions</a></p></nav>';
 
         return $html;
