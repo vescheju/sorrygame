@@ -26,14 +26,7 @@ class StartView extends View{
         $html .= <<< HTML
 <fieldset>
 <h1>Welcome to Sorry!</h1>
-<p class="checkColor"><input type="checkbox" name="color[]" value="Red">
-<label for="Red"> Red</label><br>
-<input type="checkbox" name="color[]" value="Green">
-<label for="Green"> Green</label><br>
-<input type="checkbox" name="color[]" value="Blue">
-<label for="Blue"> Blue</label><br>
-<input type="checkbox" name="color[]" value="Yellow">
-<label for="Yellow"> Yellow</label><br></p>
+
 
 <p class="startChoice">Select at least 2 players to play the game.</p>
 <p class="submit"><input type="submit" name="clear"></p>
