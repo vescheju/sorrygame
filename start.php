@@ -11,7 +11,7 @@ $view = new Game\StartView($game);
 
 </head>
 <body>
-<?php echo $view->choose(); ?>
+<?php echo $view->multiPlayerChoose(); ?>
 </body>
 </html>
 
