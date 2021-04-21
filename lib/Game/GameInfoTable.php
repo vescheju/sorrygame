@@ -57,7 +57,7 @@ SQL;
         $sql = <<< SQL
 UPDATE $this->tableName
 SET players=?
-WHERE id=$id
+WHERE id=?
 SQL;
         $players = $room->getPlayers();
         $players["player".strval(count($players)+1)] = $user->getId();
@@ -69,7 +69,7 @@ SQL;
         $str = json_encode($players);
         // print($str);
 
-        $statement->execute(array($str));
+        $statement->execute(array($str,$id));
         if ($statement->rowCount() === 0) {
             return null;
         }
@@ -83,7 +83,7 @@ SQL;
         $sql = <<< SQL
 UPDATE $this->tableName
 SET players=?
-WHERE id=$id
+WHERE id=?
 SQL;
 
         $players = $room->getPlayers();
@@ -99,7 +99,7 @@ SQL;
 
         print($str);
 
-        $statement->execute(array($str));
+        $statement->execute(array($str,$id));
         if ($statement->rowCount() === 0) {
             return null;
         }
