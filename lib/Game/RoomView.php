@@ -31,7 +31,7 @@ class RoomView extends View
         // print_r($room);
         $html = <<<HTML
             TODO: update this page when room info is changed. ex. someone joined/ someone got ready/ host started the game
-<form method="post" action="post/rooms-post.php?game-id=$this->game_id">
+<form method="post" action="post/room-post.php?game-id=$this->game_id">
             <input type="submit" name="leave" id="" value="Leave">
  <fieldset>
 HTML;
