@@ -12,6 +12,25 @@ class PlayerTable extends Table
     }
 
     /*
+     * Inserts a player id into the player table
+     **/
+    public function setPlayerId(GamePlayer $player) {
+        $sql = <<<SQL
+INSERT INTO $this->tableName (player_id)
+VALUES (?)
+SQL;
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+        $statement->execute(array($player->getId()));
+        if($statement->rowCount() === 0) {
+            return null;
+        }
+
+
+        return $pdo->lastInsertId();
+
+    }
+    /*
      * get game by its state (started or not started)
      */
     public function getPlayerById($id){
@@ -33,7 +52,7 @@ SQL;
      * get game by its state (started or not started)
      */
     public function SetPawns(GamePlayer $player, $pawnsArray){
-        $sql = <<< SQL
+        $sql = <<<SQL
 UPDATE $this->tableName
 SET pawns=?
 WHERE id=?
@@ -47,6 +66,23 @@ SQL;
             return null;
         }
         return true;
+    }
+
+    public function setColor(GamePlayer $player, $color) {
+        $sql = <<<SQL
+UPDATE $this->tableName
+SET color=?
+WHERE id=?
+SQL;
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        $statement->execute(array($color, $player->getId()));
+        if ($statement->rowCount() == 0) {
+            return false;
+        }
+        return true;
+
     }
 
 
