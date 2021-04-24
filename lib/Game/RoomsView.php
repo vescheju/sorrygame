@@ -20,7 +20,7 @@ class RoomsView extends View
         $html = <<<HTML
 
 <a href="./rooms.php">Refresh list</a>
-<form method="post" action="">
+<form method="post" action="post/rooms.php">
     <fieldset>
         <legend>Room List</legend>
 HTML;
@@ -34,7 +34,7 @@ for ($i=0; $i<count($rooms); $i++){
         <p class="1">$game_id</p>
         <p class="2">$owner</p>
         <p class="3">$players</p>
-        <p class="4"><a href="post/rooms-post.php?game-id=$game_id">Join</a></p>
+        <p class="4"><a href="post/room-post.php?game-id=$game_id">Join</a></p>
     </div>
 HTML;
 }
@@ -42,7 +42,7 @@ HTML;
         $html .= <<<HTML
     </fieldset>
     <p>
-        <input type="submit" name="create_room" id="create_room" value="Create a room">TODO
+        <input type="submit" name="create_room" id="create_room" value="Create a room">
         <input type="submit" name="random_room" id="random_room" value="Join a random room">TODO
     </p>
 
