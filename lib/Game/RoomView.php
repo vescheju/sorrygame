@@ -32,7 +32,6 @@ class RoomView extends View
         $html = <<<HTML
             TODO: update this page when room info is changed. ex. someone joined/ someone got ready/ host started the game
 <form method="post" action="post/room-post.php?game-id=$this->game_id">
-            <input type="submit" name="leave" id="" value="Leave">
  <fieldset>
 HTML;
         $players = $room->getPlayers();
@@ -57,8 +56,7 @@ HTML;
     
     </fieldset>
     <p>
-        <input type="submit" name="" id="" value="Ready">TODO: get ready
-        <input type="submit" name="" id="" value="Start" disabled>TODO: owner can start a game when everyone is ready
+        <input type="submit" name="start" id="start" value="Start">
         
     </p>
 HTML;

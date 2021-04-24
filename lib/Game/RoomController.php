@@ -17,6 +17,7 @@ class RoomController
         $this->user = $user;
 
         $info = new GameInfoTable($this->site);
+        $game = new GamesTable($this->site);
 
 
         if (isset($post["leave"]) || isset($post["home"])){
@@ -26,6 +27,10 @@ class RoomController
             $this->game_id = $get["game-id"];
             $info->joinRoomById($get["game-id"], $user);
             $this->redirect = "$root/room.php?game-id=".strval($this->game_id);
+        }
+        else if (isset($post["start"])) {
+            $this->game_id = $get["game-id"];
+            $this->redirect = "$root/game.php?game-id=".strval($this->game_id);
         }
 
 
