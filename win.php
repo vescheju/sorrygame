@@ -2,10 +2,10 @@
 require __DIR__ . '/lib/game.inc.php';
 $winner = $game->getWon();
 if ($winner == null){
-    $color = "Nobody has";
+    $color = "Nobody";
     $id = "noWin";
-}
-else{
+
+}else{
     $color = $winner->getColor();
     if ($color == Game\Game::RED){
         $color = "RED";
@@ -40,7 +40,16 @@ else{
 
     <div id='WinnerDiv'>
         <p id = '<?php echo $id;?>'><?php echo $color;?></p>
-        <p>won the game! Congratulations!!</p>
+        <?php
+        if($id === 'noWin'){
+            echo '<p>won the game!</p>';
+
+        }else{
+            echo '<p>won the game! Congratulations!!</p>';
+
+        }
+        ?>
+
     </div>
 </div>
 
