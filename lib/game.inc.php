@@ -16,6 +16,12 @@ if(isset($_SESSION[Game\User::SESSION_NAME])) {
     $user = $_SESSION[Game\User::SESSION_NAME];
 }
 
+$game_id = null;
+define("GAME_ID", 'game_id');
+if(isset($_SESSION[GAME_ID])) {
+    $game_id = $_SESSION[GAME_ID];
+}
+
 // redirect if user is not logged in
 if((!isset($open) || !$open) && $user === null) {
     $root = $site->getRoot();

@@ -21,11 +21,11 @@ class Game
         $this->gameState = self::DRAWCARD;
     }
 
-    public function addPlayer($color){
+    public function addPlayer($color, $turn_bool){
         $this->playerCount++;
         $player = new Player($color);
         $this->players[] = $player;
-        if($this->playerTurn == null){
+        if($turn_bool == true){
             $this->playerTurn = $player;
         }
     }
@@ -43,18 +43,34 @@ class Game
     }
 
     // Update this function so the game can be reset upon each new game
-    public function newGame(){
+    public function newGame(Site $site, $game_id){
+        $this->site = $site;
+        $this->game_id=$game_id;
+
+        $gamesTable = new GamesTable($site);
+        $playerTable = new PlayerTable($site);
+        $gameTable = $gamesTable->get($game_id);
+
+        $players = $gameTable->getPlayerIds();
+        foreach ($players as $player){
+            $player_turn = false;
+            if ($player == $gameTable->getPlayerTurn()){
+                $player_turn = true;
+            }
+            $color = ($playerTable->getPlayerById($player))->getColor();
+            $this->addPlayer($color, $player_turn);
+        }
         $this->gameState = self::DRAWCARD;
-        $this->players = array();
-        $this->playerCount = 0;
-        $this->cards = new Cards($this);
+
+        $this->cards = $gameTable->getCards();
         $this->card = null;
-        $this->nodes = array();
-        $this->playerTurn = null;
+        $this->nodes = $gameTable->getOccupied();
         $this->ConstructNodes();
         $this->playerNumberTurn = 0;
         $this->selected = null;
         $this->game_won = null;
+
+        $gamesTable->setStarted($gameTable, 1);
     }
 
     public function ConstructNodes(){
@@ -841,6 +857,14 @@ class Game
         return $this->game_won;
     }
 
+    public function setGameId($id){
+        $this->game_id = $id;
+    }
+
+    public function getGameId(){
+        return $this->game_id;
+    }
+
     private $selected; // The selected pawn from the player
     private $playerCount = 0;
     private $players; // All the players in the current game
@@ -859,4 +883,6 @@ class Game
     private $difference = 0; // for the 7 card if they choose to split, so we know how much to move the second time
     private $totalMovement; // for first turn of 7 card if they choose to split
     private $game_won=null;
+    private $game_id;
+    private $site;
 }

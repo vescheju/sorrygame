@@ -29,8 +29,9 @@ SQL;
     }
 
 
-    public function addPlayer(GameTable $gameTable, GamePlayer $player)
+    public function addPlayer($game_id, GamePlayer $player)
     {
+        $gameTable =$this->get($game_id);
         $players = $gameTable->getPlayerIds();
         $count = count($players);
         $key = "player" . $count;
@@ -262,5 +263,18 @@ SQL;
             return false;
         }
         return true;
+    }
+
+    public function getAvailableColor($gameid){
+        $game = $this->get($gameid);
+        $colors = array(Game::GREEN, Game::RED, Game::BLUE, Game::YELLOW);
+
+        foreach ($colors as $color){
+            $check = $this->getPlayer($game, $color);
+            if ($check == null){
+                return $color;
+            }
+        }
+        return null;
     }
 }

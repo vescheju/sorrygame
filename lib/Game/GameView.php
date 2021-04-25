@@ -156,9 +156,6 @@ class GameView extends View{
             $html .= "You have finished your turn, please click *DONE* to continue.";
         }
 
-        /*else if ($state == "7"){
-            $html .= "Game is over.";
-        } */
 
 
         $html .= "</div>";

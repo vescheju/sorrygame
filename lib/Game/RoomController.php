@@ -12,7 +12,7 @@ class RoomController
     private $redirect;
     private $get;
 
-    public function __construct(Site $site, User $user, $get, &$post){
+    public function __construct(Site $site, User $user, $get, &$post, &$gameClass){
         $root = $site->getRoot();
         $this->site = $site;
         $this->user = $user;
@@ -31,10 +31,20 @@ class RoomController
             $this->redirect = "$root/room.php?game-id=".strval($this->game_id);
             $playerTable = new PlayerTable($site);
             $playerTable->setPlayerId($user->getId());
+            $game = new GamesTable($this->site);
+
+            $color = $game->getAvailableColor($this->game_id);
+            if($color != null){
+                $player = $playerTable->getPlayerById($user->getId());
+                $playerTable->setColor($player, $color);
+            }
         }
-        else if (isset($post["start"])) {
-            $this->game_id = $get["game-id"];
-            $this->redirect = "$root/game.php?game-id=".strval($this->game_id);
+        if (isset($post["start"])) {
+            //$this->game_id = $get["game-id"];
+            //$this->redirect = "$root/game.php?game-id=".strval($this->game_id);
+
+            $gameClass->newGame($site, $this->game_id);
+            $this->redirect = "$root/game.php";
         }
     }
 

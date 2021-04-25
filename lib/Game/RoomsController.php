@@ -12,11 +12,13 @@ class RoomsController{
 
         if(isset($post['create_room'])){
             $game = new Game();
-            $gamesTable->createGame($user,$game);
+            $gameID = $gamesTable->createGame($user,$game);
+            $this->redirect = "$root/room.php?game-id=" . strval($gameID);
 
             $playerTable = new PlayerTable($site);
             $playerTable->setPlayerId($user->getId());
-
+            $player = $playerTable->getPlayerById($user->getId());
+            $playerTable->setColor($player, Game::RED);
         }
 
 
@@ -26,8 +28,5 @@ class RoomsController{
         return $this->redirect;
     }
 
-
     private $redirect;
-
-
 }

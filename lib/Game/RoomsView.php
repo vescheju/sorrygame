@@ -34,7 +34,7 @@ for ($i=0; $i<count($rooms); $i++){
         <p class="1">$game_id</p>
         <p class="2">$owner</p>
         <p class="3">$players</p>
-        <p class="4"><a href="post/room-post.php?game-id=$game_id">Join</a></p>
+        <p class="4"><a href="post/room-post.php?game-id=$game_id" ;>Join</a></p>
     </div>
 HTML;
 }

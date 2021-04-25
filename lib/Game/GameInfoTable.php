@@ -106,4 +106,5 @@ SQL;
         $row = $statement->fetch(\PDO::FETCH_ASSOC);
         return new GameInfo($row);
     }
+
 }

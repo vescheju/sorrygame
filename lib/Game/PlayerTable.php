@@ -15,13 +15,16 @@ class PlayerTable extends Table
      * Inserts a player id into the player table
      **/
     public function setPlayerId($id) {
+        $pawns = array();
+        $pawns_json = json_encode($pawns);
+        $color = 5;
         $sql = <<<SQL
-INSERT INTO $this->tableName (player_id)
-VALUES (?)
+INSERT INTO $this->tableName (player_id, color, pawns)
+VALUES (?, ?, ?)
 SQL;
         $pdo = $this->pdo();
         $statement = $pdo->prepare($sql);
-        $statement->execute(array($id));
+        $statement->execute(array($id, $color, $pawns_json));
         if($statement->rowCount() === 0) {
             return null;
         }
@@ -36,7 +39,7 @@ SQL;
     public function getPlayerById($id){
         $sql = <<< SQL
 SELECT * FROM $this->tableName
-WHERE id=?
+WHERE player_id=?
 SQL;
         $pdo = $this->pdo();
         $statement = $pdo->prepare($sql);
@@ -45,7 +48,7 @@ SQL;
         if ($statement->rowCount() === 0) {
             return null;
         }
-        return new GamePlayer($statement->fetchAll(\PDO::FETCH_ASSOC));
+        return new GamePlayer($statement->fetch(\PDO::FETCH_ASSOC));
     }
 
     /*
