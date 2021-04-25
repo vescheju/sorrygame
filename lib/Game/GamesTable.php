@@ -72,9 +72,9 @@ SQL;
         return null;
     }
 
-    public function createGame(User $user, GamePlayer $player, Game $game)
+    public function createGame(User $user, Game $game)
     {
-        $players = array("player1" => $player->getId());
+        $players = array("player1" => $user->getId());
         $jsonPlayers = json_encode($players);
         $started = 0;
         $ownerId = $user->getId();

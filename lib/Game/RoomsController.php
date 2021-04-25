@@ -11,7 +11,8 @@ class RoomsController{
         $gamesTable = new GamesTable($site);
 
         if(isset($post['create_room'])){
-
+            $game = new Game();
+            $gamesTable->createGame($user,$game);
 
         }
 
