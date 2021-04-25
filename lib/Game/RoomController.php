@@ -27,6 +27,8 @@ class RoomController
             $this->game_id = $get["game-id"];
             $info->joinRoomById($get["game-id"], $user);
             $this->redirect = "$root/room.php?game-id=".strval($this->game_id);
+            $playerTable = new PlayerTable($site);
+            $playerTable->setPlayerId($user->getId());
         }
         else if (isset($post["start"])) {
             $this->game_id = $get["game-id"];

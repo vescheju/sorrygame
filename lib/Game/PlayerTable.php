@@ -14,14 +14,14 @@ class PlayerTable extends Table
     /*
      * Inserts a player id into the player table
      **/
-    public function setPlayerId(GamePlayer $player) {
+    public function setPlayerId($id) {
         $sql = <<<SQL
 INSERT INTO $this->tableName (player_id)
 VALUES (?)
 SQL;
         $pdo = $this->pdo();
         $statement = $pdo->prepare($sql);
-        $statement->execute(array($player->getId()));
+        $statement->execute(array($id));
         if($statement->rowCount() === 0) {
             return null;
         }

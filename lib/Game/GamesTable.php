@@ -97,6 +97,8 @@ SQL;
             $player_turn,
             $occupied_json
         ]);
+
+
         return $this->pdo()->lastInsertId();
     }
 

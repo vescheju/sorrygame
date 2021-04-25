@@ -14,6 +14,9 @@ class RoomsController{
             $game = new Game();
             $gamesTable->createGame($user,$game);
 
+            $playerTable = new PlayerTable($site);
+            $playerTable->setPlayerId($user->getId());
+
         }
 
 
