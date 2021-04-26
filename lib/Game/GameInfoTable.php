@@ -60,21 +60,23 @@ SET players=?
 WHERE id=?
 SQL;
         $players = $room->getPlayers();
-        $players["player".strval(count($players)+1)] = $user->getId();
+        if(!in_array($user->getId(),$players)) {
+            $players["player" . strval(count($players) + 1)] = $user->getId();
 
-        // print_r($players);
+            // print_r($players);
 
-        $pdo = $this->pdo();
-        $statement = $pdo->prepare($sql);
-        $str = json_encode($players);
-        // print($str);
+            $pdo = $this->pdo();
+            $statement = $pdo->prepare($sql);
+            $str = json_encode($players);
+            // print($str);
 
-        $statement->execute(array($str,$id));
-        if ($statement->rowCount() === 0) {
-            return null;
+            $statement->execute(array($str, $id));
+            if ($statement->rowCount() === 0) {
+                return null;
+            }
+            $row = $statement->fetch(\PDO::FETCH_ASSOC);
+            return new GameInfo($row);
         }
-        $row = $statement->fetch(\PDO::FETCH_ASSOC);
-        return new GameInfo($row);
     }
 
     public function leaveRoomById($id, User $user){

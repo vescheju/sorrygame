@@ -36,8 +36,8 @@ class GameController
                 $game->nextTurn();
             }
         }
+        $game->updateDB();
         $this->reload($game);
-
     }
 
     private function reload(Game $game){
@@ -60,6 +60,7 @@ class GameController
             socket_close($socket);
         }
     }
+
     public function isReset()
     {
         return $this->reset;

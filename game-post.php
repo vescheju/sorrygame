@@ -16,6 +16,9 @@ else {
 //echo "<pre>";
 //print_r($_POST);
 //echo "</pre>";
+    //echo $game->getPlayerCount();
+   // print_r ($game->getPlayerTableIds());
+
     header("location: game.php");
     exit;
 }

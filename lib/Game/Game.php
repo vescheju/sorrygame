@@ -22,7 +22,6 @@ class Game
     }
 
     public function addPlayer($color, $turn_bool){
-        $this->playerCount++;
         $player = new Player($color);
         $this->players[] = $player;
         if($turn_bool == true){
@@ -34,7 +33,7 @@ class Game
     /**
      * @return int
      */
-    public function getPlayerCount() : int{
+    public function getPlayerCount(){
         return $this->playerCount;
     }
 
@@ -48,24 +47,14 @@ class Game
         $this->game_id=$game_id;
 
         $gamesTable = new GamesTable($site);
-        $playerTable = new PlayerTable($site);
-        $gameTable = $gamesTable->get($game_id);
+        $gameTable = $gamesTable->get($this->game_id);
 
-        $players = $gameTable->getPlayerIds();
-        $this->playerTableIds=$players;
-        foreach ($players as $player){
-            $player_turn = false;
-            if ($player == $gameTable->getPlayerTurn()){
-                $player_turn = true;
-            }
-            $color = ($playerTable->getPlayerById($player))->getColor();
-            $this->addPlayer($color, $player_turn);
-        }
         $this->gameState = self::DRAWCARD;
 
         $this->cards = new Cards($this);
         $this->cards->setCardsArray($gameTable->getCards());
-
+        $this->playerTableIds = $gameTable->getPlayerIds();
+        $this->playerCount = count($this->playerTableIds);
         $this->card = null;
         $this->nodes = $gameTable->getOccupied();
         $this->ConstructNodes();
@@ -880,8 +869,9 @@ class Game
         return $this->playerTableIds;
     }
 
+
     private $selected; // The selected pawn from the player
-    private $playerCount = 0;
+    private $playerCount;
     private $players; // All the players in the current game
     private $playerTurn; // A pointer to the player
     private $playerNumberTurn = 0; // the player numbers turn

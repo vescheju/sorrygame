@@ -23,6 +23,7 @@ $game_id = $game->getGameId();
             };
 
             conn.onmessage = function (e) {
+                console.log("got message");
                 try {
                     var msg = JSON.parse(e.data);
                     if (msg.cmd === "reload") {
@@ -33,7 +34,7 @@ $game_id = $game->getGameId();
             };
         }
 
-        pushInit(<?php echo $key;?>);
+        pushInit("<?php echo $key;?>");
     </script>
 </head>
 <body>
@@ -42,8 +43,6 @@ $game_id = $game->getGameId();
 <?php
 echo $view->gameState();
 echo $view->grid();
-echo "user_key: ". $key;
-echo " // game_id: ".$game_id;
 ?>
 
 </body>

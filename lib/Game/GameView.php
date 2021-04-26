@@ -8,6 +8,7 @@ namespace Game;
 class GameView extends View{
     public function __construct(Game $game) {
         $this->game = $game;
+        $this->game->updateGame();
     }
     /**
      * Create the HTML for the board grid
