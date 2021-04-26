@@ -83,6 +83,8 @@ SQL;
         return true;
     }
 
+
+
     public function setColor($id, $color) {
         $sql = <<<SQL
 UPDATE $this->tableName

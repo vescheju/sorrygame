@@ -54,6 +54,8 @@ class Game
 
         $this->gameState = self::DRAWCARD;
 
+        $this->playerToDisplay = 0;
+
         $this->cards = new Cards($this);
         $this->cards->setCardsArray($gameTable->getCards());
         $this->playerTableIds = $gameTable->getPlayerIds();
@@ -65,17 +67,68 @@ class Game
         $this->selected = null;
         $this->game_won = null;
 
-        $playerTable = new PlayerTable($site);
-
 
         $gamesTable->setStarted($gameTable, 1);
     }
 
     public function updateGame(){
+        $gamesTable = new GamesTable($this->site);
+        $gameTable = $gamesTable->get($this->game_id);
+
+        $card_array = $gameTable->getCards();
+        $this->cards->setCardsArray($card_array);
+
+        //$this->gameState = self::DRAWCARD;
+
+        if ($this->playerToDisplay < self::YELLOW){
+            $this->playerToDisplay +=1;
+        }
+        else{
+            $this->playerToDisplay = 0;
+        }
+
+        $playerTurn = $gamesTable->getPlayerTurn($gameTable);
+        if ($playerTurn != null) {
+            $playerTurnColor = $playerTurn->getColor();
+            foreach ($this->players as $player) {
+                if ($playerTurnColor == $player->getColor()) {
+                    $this->playerTurn = $player;
+                }
+            }
+        }
+
+        $this->card = $gameTable->getCardDrawn();
+
+        foreach ($this->players as $player){
+            $player_row = $gamesTable->getPlayer($gameTable, $player->getColor());
+            $pawn_locations = $player_row->getPawns();
+            $pawns = $player->getPawns();
+            for ($i=0; $i <count($pawn_locations);$i++){
+                $location = $pawn_locations[$i];
+                $pawn = $pawns[$i];
+                $pawn->SetPosition($location[0], $location[1]);
+            }
+        }
 
     }
 
     public function updateDB(){
+        $gamesTable = new GamesTable($this->site);
+        $gameTable = $gamesTable->get($this->game_id);
+
+        $cards_array = $this->cards->getCards();
+        $gamesTable->setCards($gameTable, $cards_array);
+
+        $gamesTable->setPlayerTurn($gameTable, $this->playerTurn->getColor());
+
+        $gamesTable->setCardDrawn($gameTable, $this->card);
+
+        $playersTable = new PlayerTable($this->site);
+        foreach ($this->players as $player){
+            $player_row = $gamesTable->getPlayer($gameTable, $player->getColor());
+            $pawns = $player->getPawns();
+            $playersTable->SetPawns($player_row->getId(), $pawns);
+        }
 
     }
 

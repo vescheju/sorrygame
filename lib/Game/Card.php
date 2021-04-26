@@ -37,6 +37,7 @@ class Card
     }
 
 
+
     //1. Move 1 / spawn
     //2. Move 2 / spawn => move two? => draw again
     //3. Move 3
