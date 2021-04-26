@@ -13,7 +13,7 @@ class RoomsController{
         if(isset($post['create_room'])){
             $game = new Game();
             $gameID = $gamesTable->createGame($user,$game);
-            $this->redirect = "$root/rooms.php?game-id=" . strval($gameID);
+            $this->redirect = "$root/room.php?game-id=" . strval($gameID);
 
             $playerTable = new PlayerTable($site);
             $playerTable->setPlayerId($user->getId());
