@@ -16,7 +16,7 @@ class GameView extends View{
      */
     public function grid(){
         $location = "";
-        if ($this->whoTurn == $color = $this->game->getUsersColor()){
+        if ($this->whoTurn == $this->game->getUsersColor()){
             $location = "game-post.php";
         }
 
