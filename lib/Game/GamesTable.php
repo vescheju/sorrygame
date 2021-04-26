@@ -152,8 +152,8 @@ SQL;
             return null;
         }
 
-
-        return $statement->fetch(\PDO::FETCH_ASSOC);
+        $json = $statement->fetch(\PDO::FETCH_ASSOC);
+        return json_decode($json, true);
     }
 
     public function setCards(GameTable $gameTable, $cards){
@@ -277,8 +277,9 @@ SQL;
             return null;
         }
 
+        $json = $statement->fetch(\PDO::FETCH_ASSOC);
 
-        return $statement->fetch(\PDO::FETCH_ASSOC);
+        return json_decode($json, true);
     }
 
     public function setOccupied(GameTable $gameTable, $nodes){

@@ -80,12 +80,6 @@ class Game
 
         //$this->gameState = self::DRAWCARD;
 
-        if ($this->playerToDisplay < self::YELLOW){
-            $this->playerToDisplay +=1;
-        }
-        else{
-            $this->playerToDisplay = 0;
-        }
 
         $playerTurn = $gamesTable->getPlayerTurn($gameTable);
         if ($playerTurn != null) {
