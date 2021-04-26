@@ -23,7 +23,7 @@ class GameView extends View{
         $html = '<nav><p class="navigation"><a href="instructions.php">Instructions</a></p></nav>';
 
         $html .= '<div class="gameForm">';
-        $html .= '<form method="post" action="'.$location . '">';
+        $html .= '<form method="post" action="game-post.php">';
         $html .= '<div class="game">';
         $html .= '<div class="board">';
         for ($i = 0; $i < 16; $i++) {
@@ -97,6 +97,8 @@ class GameView extends View{
 
     public function displayPlayer($turn){
         $color = $this->game->getUsersColor();
+        $turn = $this->game->dataTurnColor();
+
         $this->whoTurn = $turn;
         if ($turn == Game::RED) $turn = "RED";
         else if ($turn == Game::GREEN) $turn = "GREEN";

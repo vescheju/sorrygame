@@ -907,6 +907,18 @@ class Game
         $this->gameState = self::GAMEOVER;
 
     }
+    public function dataTurnColor(){
+        $gameTable = new GamesTable($this->site);
+        $newTable = $gameTable->get($this->getGameId());
+        $playerTurn = $newTable->getPlayerTurn();
+
+        $newPlayerTable = new PlayerTable($this->site);
+        $newPlayer = $newPlayerTable->getPlayerById($playerTurn);
+        return $newPlayer->getColor();
+
+    }
+
+
 
     /**
      * @return mixed
