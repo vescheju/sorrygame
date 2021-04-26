@@ -38,6 +38,7 @@ class GameController
         }
         $game->updateDB();
         $this->reload($game);
+
     }
 
     private function reload(Game $game){

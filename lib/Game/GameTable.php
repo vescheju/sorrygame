@@ -15,6 +15,7 @@ class GameTable
         $this->cards = json_decode($row['cards'],true);
         $this->player_turn = $row['player_turn'];
         $this->occupied = json_decode($row['occupied_nodes'], true);
+        $this->card_drawn = $row['card_drawn'];
     }
 
     /**
@@ -55,6 +56,9 @@ class GameTable
         return $this->occupied;
     }
 
+    public function getCardDrawn(){
+        return new Card($this->card_drawn);
+    }
 
     private $id;
     private $players;
@@ -63,4 +67,5 @@ class GameTable
     private $cards;
     private $player_turn;
     private $occupied;
+    private $card_drawn;
 }

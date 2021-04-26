@@ -153,7 +153,6 @@ SQL;
         }
 
         $json = $statement->fetch(\PDO::FETCH_ASSOC);
-
         return json_decode($json, true);
     }
 
@@ -222,6 +221,47 @@ SQL;
             return false;
         }
         return true;
+    }
+
+    public function setCardDrawn(GameTable $gameTable, Card $card){
+
+        $sql = <<<SQL
+UPDATE $this->tableName
+SET card_drawn=?
+WHERE id=?
+SQL;
+
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        try {
+            $statement->execute(array($card->getCardType(), $gameTable->getId()));
+        } catch (\PDOException $e) {
+            return false;
+        }
+        if ($statement->rowCount() === 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public function getCardDrawn(GameTable $gameTable){
+
+        $sql =<<<SQL
+SELECT card_drawn from $this->tableName
+where id=?
+SQL;
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        $statement->execute(array($gameTable->getId()));
+        if($statement->rowCount() === 0) {
+            return null;
+        }
+
+        $card_num = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        return new Card($card_num);
     }
 
     public function getOccupied(GameTable $gameTable){
