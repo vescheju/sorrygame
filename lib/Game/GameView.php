@@ -15,10 +15,15 @@ class GameView extends View{
      * @return string HTML for the grid
      */
     public function grid(){
+        $location = "";
+        if ($this->whoTurn == $color = $this->game->getUsersColor()){
+            $location = "game-post.php";
+        }
+
         $html = '<nav><p class="navigation"><a href="instructions.php">Instructions</a></p></nav>';
 
         $html .= '<div class="gameForm">';
-        $html .= '<form method="post" action="game-post.php">';
+        $html .= '<form method="post" action="'.$location . '">';
         $html .= '<div class="game">';
         $html .= '<div class="board">';
         for ($i = 0; $i < 16; $i++) {
@@ -92,7 +97,7 @@ class GameView extends View{
 
     public function displayPlayer($turn){
         $color = $this->game->getUsersColor();
-
+        $this->whoTurn = $turn;
         if ($turn == Game::RED) $turn = "RED";
         else if ($turn == Game::GREEN) $turn = "GREEN";
         else if ($turn == Game::BLUE) $turn = "BLUE";
@@ -176,6 +181,7 @@ class GameView extends View{
         return $html;
     }
 
+    private $whoTurn;
     private $game;
 
 }
