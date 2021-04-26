@@ -52,6 +52,7 @@ class Game
         $gameTable = $gamesTable->get($game_id);
 
         $players = $gameTable->getPlayerIds();
+        $this->playerTableIds=$players;
         foreach ($players as $player){
             $player_turn = false;
             if ($player == $gameTable->getPlayerTurn()){
@@ -62,7 +63,9 @@ class Game
         }
         $this->gameState = self::DRAWCARD;
 
-        $this->cards = $gameTable->getCards();
+        $this->cards = new Cards($this);
+        $this->cards->setCardsArray($gameTable->getCards());
+
         $this->card = null;
         $this->nodes = $gameTable->getOccupied();
         $this->ConstructNodes();
@@ -71,6 +74,14 @@ class Game
         $this->game_won = null;
 
         $gamesTable->setStarted($gameTable, 1);
+    }
+
+    public function updateGame(){
+
+    }
+
+    public function updateDB(){
+
     }
 
     public function ConstructNodes(){
@@ -865,6 +876,10 @@ class Game
         return $this->game_id;
     }
 
+    public function getPlayerTableIds(){
+        return $this->playerTableIds;
+    }
+
     private $selected; // The selected pawn from the player
     private $playerCount = 0;
     private $players; // All the players in the current game
@@ -885,4 +900,5 @@ class Game
     private $game_won=null;
     private $game_id;
     private $site;
+    private $playerTableIds =array();
 }

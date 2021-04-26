@@ -50,6 +50,9 @@ class Cards
         return count($this->cards);
     }
 
+    public function setCardsArray($cards_array){
+        $this->cards=$cards_array;
+    }
 
     public function isEmpty(){
         return empty($this->cards);
