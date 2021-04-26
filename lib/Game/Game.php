@@ -54,7 +54,7 @@ class Game
 
         $this->gameState = self::DRAWCARD;
 
-        $this->playerToDisplay = 0;
+        $this->playerToDisplay = $gamesTable->getDisplayPlayer($gameTable);
 
         $this->cards = new Cards($this);
         $this->cards->setCardsArray($gameTable->getCards());
@@ -90,9 +90,6 @@ class Game
 
 
 
-
-
-
     public function updateGame(){
         $gamesTable = new GamesTable($this->site);
         $gameTable = $gamesTable->get($this->game_id);
@@ -102,8 +99,9 @@ class Game
 
         //$this->gameState = self::DRAWCARD;
 
-
+        $this->playerToDisplay=$gamesTable->getDisplayPlayer($gameTable);
         $playerTurn = $gamesTable->getPlayerTurn($gameTable);
+
         if ($playerTurn != null) {
             $playerTurnColor = $playerTurn->getColor();
             foreach ($this->players as $player) {
@@ -115,28 +113,35 @@ class Game
 
         $this->card = $gameTable->getCardDrawn();
 
+
+
+
         foreach ($this->players as $player){
             $player_row = $gamesTable->getPlayer($gameTable, $player->getColor());
             $pawn_locations = $player_row->getPawns();
             $pawns = $player->getPawns();
-            for ($i=0; $i <count($pawn_locations);$i++){
+            $new_pawns = array();
+            for ($i=0; $i <count($pawns);$i++){
                 $location = $pawn_locations[$i];
                 $pawn = $pawns[$i];
                 $pawn->SetPosition($location[0], $location[1]);
+                $new_pawns[]=$pawn;
             }
+            $player->setPawns($new_pawns);
         }
 
     }
 
-    public function updateDB(){
+    public function updateDB($nextPlayer){
         $gamesTable = new GamesTable($this->site);
         $gameTable = $gamesTable->get($this->game_id);
 
         $cards_array = $this->cards->getCards();
         $gamesTable->setCards($gameTable, $cards_array);
 
-        $gamesTable->setPlayerTurn($gameTable, $this->playerTurn->getColor());
-
+        if($nextPlayer) {
+            $gamesTable->setPlayerTurn($gameTable, $this->playerTurn->getColor());
+        }
         $gamesTable->setCardDrawn($gameTable, $this->card);
 
         $playersTable = new PlayerTable($this->site);
@@ -145,7 +150,7 @@ class Game
             $pawns = $player->getPawns();
             $playersTable->SetPawns($player_row->getId(), $pawns);
         }
-
+        $gamesTable->setDisplayPlayer($gameTable, $this->playerToDisplay);
     }
 
     public function ConstructNodes(){
@@ -979,4 +984,5 @@ class Game
     private $site;
     private $playerTableIds =array();
     private $user;
+    private $currentPlayerId;
 }

@@ -85,8 +85,8 @@ SQL;
         $player_turn = $ownerId;
 
         $sql = <<<SQL
-INSERT INTO $this->tableName(started, owner_id, players, cards, player_turn, occupied_nodes)
-values(?, ?, ?, ?, ?, ?)
+INSERT INTO $this->tableName(started, owner_id, players, cards, player_turn, occupied_nodes, display_player)
+values(?, ?, ?, ?, ?, ?, ?)
 SQL;
 
         $statement = $this->pdo()->prepare($sql);
@@ -96,7 +96,8 @@ SQL;
             $jsonPlayers,
             $cards_json,
             $player_turn,
-            $occupied_json
+            $occupied_json,
+            0
         ]);
 
 
@@ -200,6 +201,7 @@ SQL;
         return $playerTable->getPlayerById($playerId);
     }
 
+
     public function setPlayerTurn(GameTable $gameTable, $colorCode){
         $player = $this->getPlayer($gameTable, $colorCode);
 
@@ -236,6 +238,44 @@ SQL;
 
         try {
             $statement->execute(array($card->getCardType(), $gameTable->getId()));
+        } catch (\PDOException $e) {
+            return false;
+        }
+        if ($statement->rowCount() === 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public function getDisplayPlayer(GameTable $gameTable){
+
+        $sql =<<<SQL
+SELECT display_player from $this->tableName
+where id=?
+SQL;
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        $statement->execute(array($gameTable->getId()));
+        if($statement->rowCount() === 0) {
+            return null;
+        }
+
+        return $statement->fetch(\PDO::FETCH_ASSOC);
+    }
+    public function setDisplayPlayer(GameTable $gameTable, $colorCode){
+
+        $sql = <<<SQL
+UPDATE $this->tableName
+SET display_player=?
+WHERE id=?
+SQL;
+
+        $pdo = $this->pdo();
+        $statement = $pdo->prepare($sql);
+
+        try {
+            $statement->execute(array($colorCode, $gameTable->getId()));
         } catch (\PDOException $e) {
             return false;
         }
@@ -317,4 +357,5 @@ SQL;
         }
         return null;
     }
+
 }

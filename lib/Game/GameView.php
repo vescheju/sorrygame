@@ -15,10 +15,6 @@ class GameView extends View{
      * @return string HTML for the grid
      */
     public function grid(){
-        $location = "";
-        if ($this->whoTurn == $this->game->getUsersColor()){
-            $location = "game-post.php";
-        }
 
         $html = '<nav><p class="navigation"><a href="instructions.php">Instructions</a></p></nav>';
 

@@ -6,7 +6,7 @@ if ($game->getWon() != null){
     exit;
 }
 else {
-    $controller = new Game\GameController($game, $_POST);
+    $controller = new Game\GameController($game, $_POST, $user);
 
 
 //Testing
@@ -16,7 +16,6 @@ else {
 //echo "<pre>";
 //print_r($_POST);
 //echo "</pre>";
-
     header("location: game.php");
     exit;
 }

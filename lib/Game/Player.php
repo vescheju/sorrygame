@@ -146,7 +146,9 @@ class Player
     }
 
 
-
+    public function setPawns($pawnArray){
+        $this->pawns = $pawnArray;
+    }
 
 
 

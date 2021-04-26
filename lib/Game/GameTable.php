@@ -16,6 +16,7 @@ class GameTable
         $this->player_turn = $row['player_turn'];
         $this->occupied = json_decode($row['occupied_nodes'], true);
         $this->card_drawn = $row['card_drawn'];
+        $this->display_player=$row['display_player'];
     }
 
     /**
@@ -68,4 +69,5 @@ class GameTable
     private $player_turn;
     private $occupied;
     private $card_drawn;
+    private $display_player;
 }
