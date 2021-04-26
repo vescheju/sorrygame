@@ -30,11 +30,11 @@ class RoomView extends View
         $users = new Users($this->site);
         // print_r($room);
         $html = <<<HTML
-            TODO: update this page when room info is changed. ex. someone joined/ someone got ready/ host started the game
 <form method="post" action="post/room-post.php?game-id=$this->game_id">
  <fieldset>
 HTML;
         $players = $room->getPlayers();
+
         foreach ($players as $player_id){
             $user = $users->get($player_id);
 
@@ -46,20 +46,31 @@ HTML;
         <p class="1">$player_id</p>
         <p class="2">$player_name</p>
         <p class="3">$player_email</p>
-        <p class="4">Ready?</p>
+        <p class="4">Ready</p>
     </div>
-    
+    </fieldset>
 HTML;
         }
 
+        if (count($players) < 2) {
+            $html .= <<<HTML
+    <p>Must have a minimum of 2 players to start the game!</p>
+HTML;
+        }
+        else {
+            $html .= <<<HTML
+    <p>Any player can click the start button to start the game!</p>
+HTML;
+        }
+
+
         $html .=<<<HTML
-    
-    </fieldset>
     <p>
         <input type="submit" name="start" id="start" value="Start">
         
     </p>
 HTML;
+
 
 
         return $html;
