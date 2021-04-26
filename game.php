@@ -9,7 +9,7 @@ $game_id = $game->getGameId();
 <head>
     <meta charset="utf-8">
     <title>Sorry!</title>
-    <link href="game.css" type="text/css" rel="stylesheet" />
+    <link href="lib/game.css" type="text/css" rel="stylesheet" />
     <script>
         /**
          * Initialize monitoring for a server push command.
