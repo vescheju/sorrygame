@@ -58,7 +58,7 @@ SQL;
         $sql = <<<SQL
 UPDATE $this->tableName
 SET pawns=?
-WHERE id=?
+WHERE player_id=?
 SQL;
         $pdo = $this->pdo();
         $statement = $pdo->prepare($sql);
@@ -71,16 +71,16 @@ SQL;
         return true;
     }
 
-    public function setColor(GamePlayer $player, $color) {
+    public function setColor($id, $color) {
         $sql = <<<SQL
 UPDATE $this->tableName
 SET color=?
-WHERE id=?
+WHERE player_id=?
 SQL;
         $pdo = $this->pdo();
         $statement = $pdo->prepare($sql);
 
-        $statement->execute(array($color, $player->getId()));
+        $statement->execute(array($color, $id));
         if ($statement->rowCount() == 0) {
             return false;
         }

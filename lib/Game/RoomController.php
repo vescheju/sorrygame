@@ -36,8 +36,7 @@ class RoomController
                 $game = new GamesTable($this->site);
                 $color = $game->getAvailableColor($this->game_id);
                 if ($color != null) {
-                    $player = $playerTable->getPlayerById($user->getId());
-                    $playerTable->setColor($player, $color);
+                    $playerTable->setColor($user->getId(), $color);
                 }
             }
         }
