@@ -54,7 +54,7 @@ SQL;
     /*
      * get game by its state (started or not started)
      */
-    public function SetPawns(GamePlayer $player, $pawnsArray){
+    public function SetPawns($id, $pawnsArray){
         $sql = <<<SQL
 UPDATE $this->tableName
 SET pawns=?
@@ -64,7 +64,7 @@ SQL;
         $statement = $pdo->prepare($sql);
         $str = json_encode($pawnsArray);
 
-        $statement->execute(array($str, $player->getId()));
+        $statement->execute(array($str, $id));
         if ($statement->rowCount() === 0) {
             return null;
         }

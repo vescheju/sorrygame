@@ -48,6 +48,7 @@ class RoomController
             $gameTable = $gamesTable->get($this->game_id);
 
             $players = $gameTable->getPlayerIds();
+            $gameClass->resetPlayers();
 
             foreach ($players as $player){
                 $player_turn = false;
@@ -55,9 +56,9 @@ class RoomController
                     $player_turn = true;
                 }
                 $color = ($playerTable->getPlayerById($player))->getColor();
-                $gameClass->addPlayer($color, $player_turn);
+                $gameClass->addPlayer($color, $player_turn, $site, $user);
             }
-            $gameClass->newGame($site, $this->game_id);
+            $gameClass->newGame($site, $this->game_id, $user);
             $this->redirect = "$root/game.php";
         }
     }

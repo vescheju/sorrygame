@@ -21,12 +21,15 @@ class Game
         $this->gameState = self::DRAWCARD;
     }
 
-    public function addPlayer($color, $turn_bool){
-        $player = new Player($color);
+    public function addPlayer($color, $turn_bool, $site, $user){
+        $player = new Player($color, $site, $user);
         $this->players[] = $player;
         if($turn_bool == true){
             $this->playerTurn = $player;
         }
+    }
+    public function resetPlayers(){
+        $this->players = array();
     }
 
 
@@ -42,7 +45,7 @@ class Game
     }
 
     // Update this function so the game can be reset upon each new game
-    public function newGame(Site $site, $game_id){
+    public function newGame(Site $site, $game_id, $user){
         $this->site = $site;
         $this->game_id=$game_id;
 
@@ -61,6 +64,9 @@ class Game
         $this->playerNumberTurn = 0;
         $this->selected = null;
         $this->game_won = null;
+
+        $playerTable = new PlayerTable($site);
+
 
         $gamesTable->setStarted($gameTable, 1);
     }

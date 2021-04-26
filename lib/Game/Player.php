@@ -6,7 +6,7 @@ namespace Game;
 
 class Player
 {
-    public function __construct($color){
+    public function __construct($color, $site, $user){
         $this->color = $color; // Set the color of the player
         if($color == Game::RED){
             $pawn1 = new Pawn($this);
@@ -62,6 +62,9 @@ class Player
             $this->pawns[] = $pawn4;
 
         }
+        $playerTable = new PlayerTable($site);
+        $playerTable->SetPawns($user->getId(),$this->pawns);
+
     }
 
     /**
