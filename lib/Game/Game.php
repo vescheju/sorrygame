@@ -69,7 +69,29 @@ class Game
 
 
         $gamesTable->setStarted($gameTable, 1);
+        $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function getUsersColor()
+    {
+        $player = new PlayerTable($this->site);
+        $currPlayer = $player->getPlayerById($this->user->getId());
+        return $currPlayer->getColor();
+
+    }
+
+
+
+
+
 
     public function updateGame(){
         $gamesTable = new GamesTable($this->site);
@@ -944,4 +966,5 @@ class Game
     private $game_id;
     private $site;
     private $playerTableIds =array();
+    private $user;
 }

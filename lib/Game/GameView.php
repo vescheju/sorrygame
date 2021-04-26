@@ -91,12 +91,24 @@ class GameView extends View{
     }
 
     public function displayPlayer($turn){
+        $color = $this->game->getUsersColor();
+
         if ($turn == Game::RED) $turn = "RED";
         else if ($turn == Game::GREEN) $turn = "GREEN";
         else if ($turn == Game::BLUE) $turn = "BLUE";
         else if ($turn == Game::YELLOW) $turn = "YELLOW";
+        if ($color == Game::RED) $color = "RED";
+        else if ($color == Game::GREEN) $color = "GREEN";
+        else if ($color == Game::BLUE) $color = "BLUE";
+        else if ($color == Game::YELLOW) $color = "YELLOW";
+
+
+
         $html = "<div id='playerTurn'>";
-        $html .= "<p>Player: </p>";
+        $html .= "<p>You are Player: $color</p>";
+
+
+        $html .= "<p>It is player: </p>";
         if ($turn == "GREEN"){
             $html .= "<p class='turn' id='greenTurn'>$turn</p>";
         }
@@ -109,6 +121,7 @@ class GameView extends View{
         elseif($turn == "YELLOW"){
             $html .= "<p class='turn' id='yellowTurn'>$turn</p>";
         }
+        $html .= "<p>turn.</p>";
         $html .= "</div>";
         return $html;
     }
