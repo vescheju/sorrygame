@@ -62,8 +62,13 @@ class Player
             $this->pawns[] = $pawn4;
 
         }
+
         $playerTable = new PlayerTable($site);
-        $playerTable->SetPawns($user->getId(),$this->pawns);
+        $currPlayer = $playerTable->getPlayerById($user->getId());
+        if($currPlayer->getColor() == $color){
+            $playerTable->SetPawns($user->getId(),$this->pawns);
+        }
+
 
     }
 

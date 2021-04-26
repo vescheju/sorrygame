@@ -62,7 +62,19 @@ WHERE player_id=?
 SQL;
         $pdo = $this->pdo();
         $statement = $pdo->prepare($sql);
-        $str = json_encode($pawnsArray);
+
+        $doubleArray = array();
+        foreach($pawnsArray as $pawns){
+            $newArray = array();
+            $newArray[] = $pawns->getXLocation();
+            $newArray[] = $pawns->getYLocation();
+
+            $doubleArray[] = $newArray;
+
+        }
+
+        $str = json_encode($doubleArray);
+
 
         $statement->execute(array($str, $id));
         if ($statement->rowCount() === 0) {
