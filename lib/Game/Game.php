@@ -97,10 +97,9 @@ class Game
         $card_array = $gameTable->getCards();
         $this->cards->setCardsArray($card_array);
 
-        //$this->gameState = self::DRAWCARD;
-
         $this->playerToDisplay=$gamesTable->getDisplayPlayer($gameTable);
-        $playerTurn = $gamesTable->getPlayerTurn($gameTable);
+        $playerTurn = $gamesTable->getPlayerTurn($this->game_id);
+        $this->currentPlayerId= $playerTurn->getId();
 
         if ($playerTurn != null) {
             $playerTurnColor = $playerTurn->getColor();
@@ -112,9 +111,6 @@ class Game
         }
 
         $this->card = $gameTable->getCardDrawn();
-
-
-
 
         foreach ($this->players as $player){
             $player_row = $gamesTable->getPlayer($gameTable, $player->getColor());
@@ -132,6 +128,7 @@ class Game
 
     }
 
+
     public function updateDB($nextPlayer){
         $gamesTable = new GamesTable($this->site);
         $gameTable = $gamesTable->get($this->game_id);
@@ -140,6 +137,7 @@ class Game
         $gamesTable->setCards($gameTable, $cards_array);
 
         if($nextPlayer) {
+
             $gamesTable->setPlayerTurn($gameTable, $this->playerTurn->getColor());
         }
         $gamesTable->setCardDrawn($gameTable, $this->card);
@@ -961,6 +959,9 @@ class Game
         return $this->playerTableIds;
     }
 
+    public function getCurrentPlayerId(){
+
+    }
 
     private $selected; // The selected pawn from the player
     private $playerCount;

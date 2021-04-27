@@ -143,6 +143,7 @@ class GameView extends View{
         } else if ($state == "5") {
             $html .= $this->displayPlayer($this->game->getPlayerToDisplay());
             $card = $this->game->getCard()->getCardType();
+
             if ($card < 14) {
                 if ($card == Card::SORRY){
                     $card ='SORRY';
@@ -164,6 +165,7 @@ class GameView extends View{
             else{
                 $html .= "<p class='state5'>Please move your pawn!</p>";
             }
+
 
         } else if ($state == "6"){
             $html .= $this->displayPlayer($this->game->getPlayerToDisplay());

@@ -153,7 +153,8 @@ SQL;
             return null;
         }
 
-        $json = $statement->fetch(\PDO::FETCH_ASSOC);
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        $json = $result['cards'];
         return json_decode($json, true);
     }
 
@@ -180,7 +181,7 @@ SQL;
         return true;
     }
 
-    public function getPlayerTurn(GameTable $gameTable){
+    public function getPlayerTurn($id){
 
         $sql =<<<SQL
 SELECT player_turn from $this->tableName
@@ -189,17 +190,22 @@ SQL;
         $pdo = $this->pdo();
         $statement = $pdo->prepare($sql);
 
-        $statement->execute(array($gameTable->getId()));
+        $statement->execute(array($id));
         if($statement->rowCount() === 0) {
+
             return null;
+
         }
 
+
         $playerId = $statement->fetch(\PDO::FETCH_ASSOC);
+        $newId = $playerId['player_turn'];
 
         $playerTable = new PlayerTable($this->site);
 
-        return $playerTable->getPlayerById($playerId);
+        return $playerTable->getPlayerById($newId);
     }
+
 
 
     public function setPlayerTurn(GameTable $gameTable, $colorCode){
@@ -261,7 +267,8 @@ SQL;
             return null;
         }
 
-        return $statement->fetch(\PDO::FETCH_ASSOC);
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        return $result['display_player'];
     }
     public function setDisplayPlayer(GameTable $gameTable, $colorCode){
 
@@ -299,8 +306,8 @@ SQL;
             return null;
         }
 
-        $card_num = $statement->fetch(\PDO::FETCH_ASSOC);
-
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        $card_num = $result['card_drawn'];
         return new Card($card_num);
     }
 
@@ -317,8 +324,8 @@ SQL;
             return null;
         }
 
-        $json = $statement->fetch(\PDO::FETCH_ASSOC);
-
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        $json = $result['occupied_nodes'];
         return json_decode($json, true);
     }
 

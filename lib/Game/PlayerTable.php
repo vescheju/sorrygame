@@ -33,9 +33,7 @@ SQL;
         return $pdo->lastInsertId();
 
     }
-    /*
-     * get game by its state (started or not started)
-     */
+
     public function getPlayerById($id){
         $sql = <<< SQL
 SELECT * FROM $this->tableName
@@ -51,9 +49,7 @@ SQL;
         return new GamePlayer($statement->fetch(\PDO::FETCH_ASSOC));
     }
 
-    /*
-     * get game by its state (started or not started)
-     */
+
     public function SetPawns($id, $pawnsArray){
         $sql = <<<SQL
 UPDATE $this->tableName

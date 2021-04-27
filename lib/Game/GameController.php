@@ -14,8 +14,9 @@ class GameController
             $game->drawCard();
             $game->setNextGameState();
             $game->updateDB(false);
-        } else if($game->getGameState() == Game::ACTION &&
-            isset($post['cell'])){
+
+        } else if ($game->getGameState() == Game::ACTION &&
+            isset($post['cell'])) {
 
             $value = strip_tags($post['cell']);
             $game->interact($value);
@@ -26,19 +27,20 @@ class GameController
 
             $game->updateDB(false);
 
-        } else if (isset($post['done'])){
+
+        } else if (isset($post['done'])) {
             // you can skip turn when you draw 11
-            if($game->getGameState() == Game::DONE){
+            if ($game->getGameState() == Game::DONE) {
                 $game->setNextGameState();
 
-            }
-            elseif($game->getCard()->getCardType()==11 && $game->getGameState() == Game::ACTION) {
+            } elseif ($game->getCard()->getCardType() == 11 && $game->getGameState() == Game::ACTION) {
                 $game->setNextGameState();
                 $game->setNextGameState();
                 $game->setBonusFlag(false);
                 $game->nextTurn();
             }
             $game->updateDB(true);
+
         }
         $this->reload($game, $user->getId());
 
@@ -70,6 +72,8 @@ class GameController
     {
         return $this->reset;
     }
+
+
 
     private $reset = false;
     // private $selectedPawn;
