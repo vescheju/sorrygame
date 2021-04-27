@@ -10,7 +10,7 @@ return function(Game\Site $site) {
     date_default_timezone_set('America/Detroit');
 
     $site->setEmail('bhadang1@msu.edu');
-    $site->setRoot('/~bhadang1/project2');
+    $site->setRoot('/~pangurus/project2');
     $site->dbConfigure('mysql:host=mysql-user.cse.msu.edu;dbname=bhadang1',
         'bhadang1',       // Database user
         'F00t$ball',     // Database password

@@ -23,6 +23,7 @@ class RoomsView extends View
 <form method="post" action="post/rooms.php">
     <fieldset>
         <legend>Room List</legend>
+        <p>Join existing room:</p>
 HTML;
 
 for ($i=0; $i<count($rooms); $i++){
@@ -43,7 +44,6 @@ HTML;
     </fieldset>
     <p>
         <input type="submit" name="create_room" id="create_room" value="Create a room">
-        <input type="submit" name="random_room" id="random_room" value="Join a random room">TODO
     </p>
 
 </form>
