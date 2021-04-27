@@ -138,7 +138,7 @@ class Game
 
         if($nextPlayer) {
 
-            $gamesTable->setPlayerTurn($gameTable, $this->playerTurn->getColor());
+            //$gamesTable->setPlayerTurn($gameTable, $this->playerTurn->getColor());
         }
         $gamesTable->setCardDrawn($gameTable, $this->card);
 
@@ -380,10 +380,19 @@ class Game
                 $this->playerNumberTurn = 0;
             }
             $this->playerTurn = $this->players[$this->playerNumberTurn];
+            $this->holder = $this->playerTurn;
+
         }
         $this->selected = null;
 
     }
+    public function nextTurnForController(){
+        $newGame = new GamesTable($this->site);
+        $theGame = $newGame->get($this->getGameId());
+        $newGame->setPlayerTurn($theGame,$this->holder->getColor());
+    }
+
+
 
     public function getNodeByXY($x, $y)
     {
@@ -986,4 +995,5 @@ class Game
     private $playerTableIds =array();
     private $user;
     private $currentPlayerId;
+    private $holder;
 }

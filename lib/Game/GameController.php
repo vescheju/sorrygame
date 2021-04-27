@@ -33,12 +33,16 @@ class GameController
             if ($game->getGameState() == Game::DONE) {
                 $game->setNextGameState();
 
+
+
             } elseif ($game->getCard()->getCardType() == 11 && $game->getGameState() == Game::ACTION) {
                 $game->setNextGameState();
                 $game->setNextGameState();
                 $game->setBonusFlag(false);
                 $game->nextTurn();
+
             }
+            $game->nextTurnForController();
             $game->updateDB(true);
 
         }
