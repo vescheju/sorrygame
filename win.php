@@ -7,6 +7,17 @@ if ($winner == null){
 
 }else{
     $color = $winner->getColor();
+    /*
+    $gamesTable = new \Game\GamesTable($site);
+    $winningPlayer = $gamesTable->getPlayer($game, $color);
+    if ($winningPlayer->getId() != $user->getId()){
+        $message="Better Luck Next Time!";
+    }
+    else{
+        $message="Great Job!";
+    }
+    */
+
     if ($color == Game\Game::RED){
         $color = "RED";
         $id = "redWin";
