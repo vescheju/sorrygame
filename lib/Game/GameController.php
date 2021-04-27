@@ -78,7 +78,6 @@ class GameController
     }
 
 
-
     private $reset = false;
     // private $selectedPawn;
 }

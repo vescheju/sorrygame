@@ -121,6 +121,7 @@ class Game
                 $location = $pawn_locations[$i];
                 $pawn = $pawns[$i];
                 $pawn->SetPosition($location[0], $location[1]);
+                $this->setOccupiedNode($pawn);
                 $new_pawns[]=$pawn;
             }
             $player->setPawns($new_pawns);
@@ -128,6 +129,9 @@ class Game
 
     }
 
+    public function setOccupiedNode(Pawn $pawn){
+        ($this->nodes[$pawn->getXLocation()][$pawn->getYLocation()])->setOccupiedPawn($pawn);
+    }
 
     public function updateDB($nextPlayer){
         $gamesTable = new GamesTable($this->site);
