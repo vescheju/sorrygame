@@ -368,6 +368,7 @@ class Game
     public function setPlayerTurn($turn)
     {
         $this->playerTurn = $turn;
+        $this->holder = $this->playerTurn;
     }
 
     /**
@@ -387,6 +388,7 @@ class Game
 
     }
     public function nextTurnForController(){
+        $this->nextTurn();
         $newGame = new GamesTable($this->site);
         $theGame = $newGame->get($this->getGameId());
         $newGame->setPlayerTurn($theGame,$this->holder->getColor());
@@ -869,6 +871,8 @@ class Game
 
         if ($this->gameState == self::DONE) {
             $this->gameState = self::DRAWCARD;
+
+
         }
         else{
             $this->gameState += 1;

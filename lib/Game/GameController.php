@@ -41,9 +41,12 @@ class GameController
                 $game->setBonusFlag(false);
                 $game->nextTurn();
 
+
             }
+
             $game->nextTurnForController();
             $game->updateDB(true);
+
 
         }
         $this->reload($game, $user->getId());
