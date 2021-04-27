@@ -197,7 +197,6 @@ SQL;
 
         }
 
-
         $playerId = $statement->fetch(\PDO::FETCH_ASSOC);
         $newId = $playerId['player_turn'];
 
@@ -205,7 +204,6 @@ SQL;
 
         return $playerTable->getPlayerById($newId);
     }
-
 
 
     public function setPlayerTurn(GameTable $gameTable, $colorCode){

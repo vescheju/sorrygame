@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Game;
 
 
@@ -87,7 +86,6 @@ class Game
         return $currPlayer->getColor();
 
     }
-
 
 
     public function updateGame(){

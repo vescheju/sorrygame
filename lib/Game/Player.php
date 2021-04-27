@@ -158,10 +158,10 @@ class Player
     private $color; // the color of the player
     private $pawns; // the pawns owned by the player
     private $name; // the player's name
-    private $reachEnd; // checking if the player has reached the end
-    private $startNode; //  the starting node tile
-    private $endNode; // the ending node tile
-    private $currentPawn; // the current pawn being moved
+    //private $reachEnd; // checking if the player has reached the end
+    //private $startNode; //  the starting node tile
+    //private $endNode; // the ending node tile
+    //private $currentPawn; // the current pawn being moved
     private $spawnLocation; // where the pawn will spawn
 
 
