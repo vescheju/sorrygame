@@ -386,16 +386,45 @@ class Game
             }
             $this->playerTurn = $this->players[$this->playerNumberTurn];
             $this->holder = $this->playerTurn;
+            $this->nextTurnForController();
 
         }
         $this->selected = null;
 
     }
     public function nextTurnForController(){
-        $this->nextTurn();
-        $newGame = new GamesTable($this->site);
-        $theGame = $newGame->get($this->getGameId());
-        $newGame->setPlayerTurn($theGame,$this->holder->getColor());
+        //$this->nextTurn();
+        if($this->holder == $this->playerTurn){
+            $newGame = new GamesTable($this->site);
+            $theGame = $newGame->get($this->getGameId());
+
+            $currTurn = $newGame->getPlayerTurn($this->game_id);
+            $theColor = $currTurn->getColor();
+            $newColor = 0;
+            $count = 0;
+            $allPlayer = $newGame->get($this->game_id);
+            $colors = array(Game::GREEN, Game::RED, Game::BLUE, Game::YELLOW);
+
+            foreach ($colors as $color){
+                $check = $newGame->getPlayer($allPlayer, $color);
+                if ($check != null){
+                    if($color != $theColor){
+                        $newColor = $color;
+                        $count++;
+                    }
+                    elseif ($color == $theColor){
+                        $count++;
+                    }
+                }
+            }
+
+
+            $newGame->setPlayerTurn($theGame,$newColor);
+
+        }
+
+
+
     }
 
 
@@ -875,6 +904,7 @@ class Game
 
         if ($this->gameState == self::DONE) {
             $this->gameState = self::DRAWCARD;
+
 
 
         }

@@ -34,7 +34,6 @@ class GameController
                 $game->setNextGameState();
 
 
-
             } elseif ($game->getCard()->getCardType() == 11 && $game->getGameState() == Game::ACTION) {
                 $game->setNextGameState();
                 $game->setNextGameState();
@@ -44,7 +43,7 @@ class GameController
 
             }
 
-            $game->nextTurnForController();
+
             $game->updateDB(true);
 
 
